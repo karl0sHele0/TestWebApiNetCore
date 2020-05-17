@@ -1,12 +1,17 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Examen.Models;
 
 namespace Examen
 {
-    public class SerieTVRepository : ISerieTVRepository
+    public class SqliteSeriesRepository : ISerieTVRepository
     {
+        private readonly string constr;
+        public SqliteSeriesRepository()
+        {
+             constr = "Data Source= SeriesTV.db";
+        }
+
         public void Actualizar(SerieModel model)
         {
             throw new NotImplementedException();
@@ -29,6 +34,7 @@ namespace Examen
 
         public List<SerieModel> LeerTodos()
         {
+            string sql = "Select * From SeriesOnStream";
             throw new NotImplementedException();
         }
     }
