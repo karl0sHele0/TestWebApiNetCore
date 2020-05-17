@@ -1,3 +1,6 @@
+//Ochoa Medrano Carlos Heleodoro
+//Ingeniería Web
+//17-05-2020
 using System;
 using System.Collections.Generic;
 using System.Linq;
