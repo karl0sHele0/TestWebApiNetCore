@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Examen.Models;
 
 namespace Examen.Controllers
 {
@@ -11,11 +12,18 @@ namespace Examen.Controllers
     [ApiController]
     public class SeriesController : ControllerBase
     {
+        private readonly ISerieTVRepository series;
+        public SeriesController()
+        {
+            series = new SqliteSeriesRepository();
+        }
+
         // GET: api/Series
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<SerieModel> Get()
         {
-            return new string[] { "value1", "value2" };
+            List<SerieModel> model = series.LeerTodos();
+            return model;
         }
 
         // GET: api/Series/5

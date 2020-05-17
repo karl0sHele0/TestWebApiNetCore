@@ -50,18 +50,12 @@ namespace Examen
 
         private void InitDB()
         {
-            var con = new SqliteConnection("Data Source= SeriesTV.db");
-            var cmd = new SqliteCommand(
-                    "CREATE TABLE IF NOT EXISTS Plataformas ("
-                    + "'Id_Plat' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
-                    + "'Nombre' TEXT NOT NULL,"
-                    + "'Url' TEXT NOT NULL ); "
-                    + "CREATE TABLE IF NOT EXISTS SeriesOnStream ("
+            var con = new SqliteConnection("Data Source= SeriesOnStream.db");
+            var cmd = new SqliteCommand("CREATE TABLE IF NOT EXISTS SeriesOnStream ("
                     + "'Id_Serie' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
                     + "'Nombre' TEXT NOT NULL,"
-                    + "'Calificacion' INTEGER NOT NULL,"
-                    + "'Plataforma' INTEGER NOT NULL,"
-                    + " FOREIGN KEY('Plataforma') REFERENCES 'Plataformas'('Id_Plat'));"
+                    + "'Plataforma' TEXT NOT NULL,"
+                    + "'Calificacion' INTEGER NOT NULL);"
                 );
             cmd.Connection = con;
 
@@ -70,7 +64,7 @@ namespace Examen
                 cmd.ExecuteNonQuery();
             }catch(Exception ex){
                 Console.WriteLine(ex.Message);
-            }     
+            }
         }
     }
 }
