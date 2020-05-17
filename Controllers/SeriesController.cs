@@ -1,11 +1,7 @@
 //Ochoa Medrano Carlos Heleodoro
 //Ingeniería Web
 //17-05-2020
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Examen.Models;
 

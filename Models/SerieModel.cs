@@ -1,8 +1,6 @@
 //Ochoa Medrano Carlos Heleodoro
 //Ingeniería Web
 //17-05-2020
-using System;
-
 namespace Examen.Models{
 
     public class SerieModel{

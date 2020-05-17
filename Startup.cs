@@ -1,15 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace Examen
 {
@@ -45,26 +38,8 @@ namespace Examen
                 endpoints.MapControllers();
             });
 
-            InitDB();
-        }
-
-        private void InitDB()
-        {
-            var con = new SqliteConnection("Data Source= SeriesOnStream.db");
-            var cmd = new SqliteCommand("CREATE TABLE IF NOT EXISTS SeriesOnStream ("
-                    + "'Id_Serie' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
-                    + "'Nombre' TEXT NOT NULL,"
-                    + "'Plataforma' TEXT NOT NULL,"
-                    + "'Calificacion' INTEGER NOT NULL);"
-                );
-            cmd.Connection = con;
-
-            try{
-                con.Open();
-                cmd.ExecuteNonQuery();
-            }catch(Exception ex){
-                Console.WriteLine(ex.Message);
-            }
+            //Metodo estatico para iniciar la Base de Datos
+            SqliteSeriesRepository.IniciarBD();
         }
     }
 }
