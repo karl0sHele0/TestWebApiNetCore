@@ -17,9 +17,9 @@ namespace Examen
 
         public void Actualizar(SerieModel model)
         {
-            string query = "UPDATE SeriesOnStream" 
-                            +"SET Nombre = @Nombre, Plataforma = @Plataforma, Calificacion = @Calificacion" 
-                            +"WHERE Id_Serie = @ID";
+            string query = "UPDATE SeriesOnStream " 
+                            +" SET Nombre = @Nombre, Plataforma = @Plataforma, Calificacion = @Calificacion " 
+                            +" WHERE Id_Serie = @ID";
             using (var conn = new SqliteConnection(constr))
             {
                 var serie = conn.Execute(query,model);

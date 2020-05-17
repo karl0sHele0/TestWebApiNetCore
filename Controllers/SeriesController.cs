@@ -20,10 +20,10 @@ namespace Examen.Controllers
 
         // GET: api/Series
         [HttpGet]
-        public ActionResult<SerieModel> Get()
+        public ActionResult<List<SerieModel>> Get()
         {
-            List<SerieModel> model = series.LeerTodos();
-            return Ok(model);
+            var listaSereies = series.LeerTodos();
+            return Ok(listaSereies);
         }
 
         // GET: api/Series/5
@@ -33,29 +33,49 @@ namespace Examen.Controllers
             if(id<0)
                 return BadRequest();
 
-            var v= series.LeerPorID(id);
-            if(v == null)
+            var serie = series.LeerPorID(id);
+            if(serie == null)
                 return NotFound();
             
-            return Ok(v);
+            return Ok(serie);
         }
 
         // POST: api/Series
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] SerieModel model)
         {
+            series.Crear(model);
+            return Ok();
         }
 
         // PUT: api/Series/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        //[HttpPut("{id}")]
+        public ActionResult Put([FromBody] SerieModel model)
         {
+            if(model.ID < 0)
+                return BadRequest();
+
+            var serie = series.LeerPorID(model.ID);
+            if(serie == null)
+                return NotFound();
+
+            series.Actualizar(model);
+            return Ok();
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+             if(id<0)
+                return BadRequest();
+
+            var serie = series.LeerPorID(id);
+            if(serie == null)
+                return NotFound();
+
+            series.Borrar(id);
+            return Ok();
         }
     }
 }
