@@ -20,17 +20,24 @@ namespace Examen.Controllers
 
         // GET: api/Series
         [HttpGet]
-        public IEnumerable<SerieModel> Get()
+        public ActionResult<SerieModel> Get()
         {
             List<SerieModel> model = series.LeerTodos();
-            return model;
+            return Ok(model);
         }
 
         // GET: api/Series/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public ActionResult<SerieModel> Get(int id)
         {
-            return "value";
+            if(id<0)
+                return BadRequest();
+
+            var v= series.LeerPorID(id);
+            if(v == null)
+                return NotFound();
+            
+            return Ok(v);
         }
 
         // POST: api/Series
