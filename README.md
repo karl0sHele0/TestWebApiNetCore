@@ -52,13 +52,13 @@ Estos son importantes para que se agreguen las librerias que se requieren como s
 > dotnet add package Dapper
 ```
 
-Cada vez que se hacen este tipo de modificación se recomienda usar los soguientes comandos para verificar que todo esta bien:
+Cada vez que se hacen este tipo de modificación se recomienda usar los siguientes comandos para verificar que todo esta bien:
 ```sh
 > dotnet restore
 > dotnet build
 ```
 # Crear Modelo
-- Crear Carpeta llamada **Models** en la raiz del proyecto del  proyecto de Netcore 
+- Crear Carpeta llamada **Models** en la raiz del  proyecto de Netcore 
 - Crear un archivo en la carpeta [**Models**], ejemplo **"SerieModel.cs"**.
 - Construir el codigo del modelo dependiendo el ejemplo dado/seleccionado:
 
