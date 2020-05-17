@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -43,6 +44,33 @@ namespace Examen
             {
                 endpoints.MapControllers();
             });
+
+            InitDB();
+        }
+
+        private void InitDB()
+        {
+            var con = new SqliteConnection("Data Source= SeriesTV.db");
+            var cmd = new SqliteCommand(
+                    "CREATE TABLE IF NOT EXISTS Plataformas ("
+                    + "'Id_Plat' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+                    + "'Nombre' TEXT NOT NULL,"
+                    + "'Url' TEXT NOT NULL ); "
+                    + "CREATE TABLE IF NOT EXISTS SeriesOnStream ("
+                    + "'Id_Serie' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+                    + "'Nombre' TEXT NOT NULL,"
+                    + "'Calificacion' INTEGER NOT NULL,"
+                    + "'Plataforma' INTEGER NOT NULL,"
+                    + " FOREIGN KEY('Plataforma') REFERENCES 'Plataformas'('Id_Plat'));"
+                );
+            cmd.Connection = con;
+
+            try{
+                con.Open();
+                cmd.ExecuteNonQuery();
+            }catch(Exception ex){
+                Console.WriteLine(ex.Message);
+            }     
         }
     }
 }
